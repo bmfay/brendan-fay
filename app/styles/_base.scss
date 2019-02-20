@@ -1,0 +1,64 @@
+
+// Base Styles
+//
+// These set base font styles and override disadvantageous
+// browser defaults
+
+html {
+  color: $color-text;
+  font-family: $main-font;
+  font-size: 10px;
+  height: 100%;
+  margin: 0;
+  min-height: 100%;
+  padding: 0;
+}
+
+body {
+  background-color: $color-background;
+  font-family: $main-font;
+  height: 100%;
+  margin: 0;
+  min-height: 100%;
+  padding: 0;
+}
+h1,h2,h3,h4,h5,h6 { margin: 0; }
+
+h1 {
+  font-family: $header-font;
+  font-size: 2.6rem;
+}
+h2, h3, h4, h5, h6 {
+  font-family: $subheader-font;
+}
+
+a {
+  color: $color-link;
+  &:active, &:visited {
+    text-decoration: none;
+    outline: 0;
+    color: $color-link;
+  }
+  &:hover {
+    cursor: pointer;
+    color: $color-link-hover;
+  }
+}
+
+body > .ember-view {
+  height: 100%;
+  min-height: 100%;
+}
+
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ul, ol, dl {
+  padding: 0;
+  margin: 0;
+}
+
+li { list-style-type: none; }
