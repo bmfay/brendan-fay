@@ -15,9 +15,17 @@
       {{#each composition.score.pages as |page index|}}
         <div class='form__subsection'>
           <div>Page {{inc index}}</div>
-          {{#form-label label='Image Url' errors=page.errors.url}}
-            {{input value=page.url}}
-          {{/form-label}}
+          {{#cloudinary-upload
+            model=page
+            description='Upload Image'
+            attribute='cloudinaryId'
+            imageWidth=120
+            imageHeight=200
+            crop='fit'
+            cloudinaryId=page.cloudinaryId
+          }}
+            <span>Upload Page</span>
+          {{/cloudinary-upload}}
 
           {{#form-label label='Begin Time (seconds)' errors=page.errors.beginTime}}
             {{input value=page.beginTime}}

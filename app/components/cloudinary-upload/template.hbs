@@ -1,0 +1,45 @@
+<input type='file' name='file' style='display: none'>
+
+{{#if cloudinaryId}}
+  <div class='image-upload__image-container'>
+    {{!-- <div class='image-upload__post-actions'>
+      <div class='l--clickable' {{action 'delete' model}}>
+        <i class='material-icons link'>delete</i>
+      </div>
+    </div> --}}
+
+    {{cloudinary-img
+      cloudinaryId=cloudinaryId
+      originalFilename=originalFilename
+      width=imageWidth
+      height=imageHeight
+      crop=crop
+      class='image-upload__image'
+    }}
+  </div>
+{{else if isUploading}}
+  <button class='button--small' disabled>
+    {{progress}}%
+  </button>
+{{else if isProcessing}}
+  <button class='button--small' disabled>
+    {{loader-ellipsis}}
+  </button>
+{{else}}
+  {{#if showButton}}
+    <button {{action 'openDialog'}} class='button--small'>
+      {{#if hasBlock}}
+        {{yield}}
+      {{/if}}
+    </button>
+  {{else}}
+    <div class='image-upload__upload-square {{imageClass}}' {{action 'openDialog'}} role='button'>
+      <div class='t--center l--p-b-10 {{if disabled 'color-disabled'}}'>
+        <div class='l--m-b-10'>
+          <i class='material-icons'>add</i>
+        </div>
+        <div>{{description}}</div>
+      </div>
+    </div>
+  {{/if}}
+{{/if}}

@@ -20,7 +20,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
   };
 
   if (environment === 'development') {
@@ -29,6 +29,11 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV['cloudinary'] = {
+      name: process.env.CLOUDINARY_CLOUD_NAME,
+      documentUploadPreset: "development",
+    };
   }
 
   if (environment === 'test') {
@@ -41,10 +46,14 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+
   }
 
   if (environment === 'production') {
-    // here you can enable a production-specific feature
+    ENV['cloudinary'] = {
+      name: process.env.CLOUDINARY_CLOUD_NAME,
+      documentUploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
+    };
   }
 
   return ENV;

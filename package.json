@@ -53,5 +53,9 @@
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
+  },
+  "dependencies": {
+    "blueimp-file-upload": "^9.28.0",
+    "cloudinary-jquery-file-upload": "^2.6.2"
   }
 }

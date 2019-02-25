@@ -7,7 +7,7 @@ const {
 
 export default DS.Model.extend({
   beginTime: attr('number'),
-  url: attr('string'),
+  cloudinaryId: attr('string'),
 
   score: belongsTo('score')
 });
