@@ -1,0 +1,45 @@
+.form {
+  padding: 20px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 800px;
+  border-radius: $border-radius-standard;
+  border: 2px solid $color-text;
+}
+
+.form__section {
+  padding: 10px;
+  background: #d9d6d6;
+  margin-bottom: 20px;
+}
+
+.form__subsection {
+  background: #ccc6d6;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.form h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.form h2 {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.button--main {
+  padding: 10px;
+  margin: 30px auto 20px;
+}
+
+label {
+  font-size: 1.46em;
+  margin-bottom: 15px;
+  display: block;
+}

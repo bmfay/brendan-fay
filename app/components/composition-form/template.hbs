@@ -1,0 +1,70 @@
+<h1>Composition Form</h1>
+
+{{#form-label label='Title' errors=composition.errors.title}}
+  {{input value=composition.title}}
+{{/form-label}}
+
+{{#form-label label='Description' errors=composition.errors.description}}
+  {{textarea value=composition.description}}
+{{/form-label}}
+
+{{#unless composition.isNew}}
+  <div class='form__section'>
+    <h2>Score</h2>
+    {{#if composition.score}}
+      {{#each composition.score.pages as |page index|}}
+        <div class='form__subsection'>
+          <div>Page {{inc index}}</div>
+          {{#form-label label='Image Url' errors=page.errors.url}}
+            {{input value=page.url}}
+          {{/form-label}}
+
+          {{#form-label label='Begin Time (seconds)' errors=page.errors.beginTime}}
+            {{input value=page.beginTime}}
+          {{/form-label}}
+          <button {{action 'savePage' page}}>
+            Save Page
+          </button>
+        </div>
+      {{/each}}
+      <button {{action 'addPage' composition.score}}>
+        Add Page
+      </button>
+    {{else}}
+      <button {{action 'addScore' composition}}>
+        Add Score
+      </button>
+    {{/if}}
+  </div>
+
+  <div class='form__section'>
+    <h2>Recording</h2>
+    {{#if composition.recording}}
+      {{#form-label label='Recorded On' errors=composition.recording.errors.recordedOn}}
+        {{pikaday-input
+          value=composition.recording.recordedOn
+          placeholder='Recorded On'
+          format='MMMM Do, YYYY'
+          firstDay=0
+          useUTC=true
+          onSelection=(action (mut composition.recording.recordedOn))
+        }}
+      {{/form-label}}
+
+      {{#form-label label='Url' errors=composition.recording.errors.url}}
+        {{textarea value=composition.recording.url}}
+      {{/form-label}}
+      <button {{action 'saveRecording' composition.recording}}>
+        Save Recording
+      </button>
+    {{else}}
+      <button {{action 'addRecording' composition}}>
+        Add Recording
+      </button>
+    {{/if}}
+  </div>
+{{/unless}}
+
+<button {{action save composition}} class='button--main'>
+  Save Composition Details
+</button>

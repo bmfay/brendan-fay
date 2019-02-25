@@ -1,11 +1,14 @@
 import DS from 'ember-data';
 
 const {
-  attr
+  attr,
+  belongsTo,
 } = DS;
 
 export default DS.Model.extend({
-    description: attr('string'),
-    url: attr('string'),
-    title: attr('string'),
+  description: attr('string'),
+  title: attr('string'),
+
+  score: belongsTo('score'),
+  recording: belongsTo('recording'),
 });

@@ -1,9 +1,12 @@
-@import "variables";
+@import 'variables';
 
-@import "normalize";
-@import "base";
-@import "palette";
+@import 'normalize';
+@import 'base';
+@import 'palette';
 
 // Components
 @import 'components/music-piece';
 @import 'components/nav';
+@import 'components/typography';
+@import 'components/layout';
+@import 'components/form';

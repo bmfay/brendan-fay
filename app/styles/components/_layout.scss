@@ -1,0 +1,242 @@
+// Display helpers
+
+.l--inline {
+  display: inline !important;
+}
+
+.l--inline-block {
+  display: inline-block !important;
+}
+
+.l--block {
+  display: block !important;
+}
+
+.l--center {
+  margin: 0 auto !important;
+}
+
+.l--position-relative {
+  position: relative;
+}
+
+// Visibility
+
+.l--hidden {
+  display: none !important;
+}
+
+.l--invisible {
+  visibility: hidden !important;
+}
+
+.l--transparent {
+  background-color: transparent !important;
+}
+
+.l--clickable {
+  cursor: pointer !important;
+}
+
+// Float
+
+.l--pull-left {
+  float: left !important;
+}
+
+.l--pull-right {
+  float: right !important;
+}
+
+// Flex helpers
+
+.l--flex {
+  display: flex !important;
+}
+
+.l--flex-column {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.l--flex-row-reverse {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+}
+
+.l--flex-1 {
+  flex: 1 !important;
+}
+
+.l--flex-grow-1 {
+  flex-grow: 1 !important;
+}
+
+.l--flex-grow-2 {
+  flex-grow: 2 !important;
+}
+
+.l--flex-wrap {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.l--spread {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.l--space-around {
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+.l--flex-align-top {
+  display: flex !important;
+  align-items: flex-start !important;
+}
+
+.l--flex-end {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.l--flex-item-start {
+  align-self: flex-start !important;
+}
+
+.l--flex-item-end {
+  align-self: flex-end !important;
+}
+
+.l--flex-bottom {
+  align-items: flex-end !important;
+  display: flex !important;
+}
+
+.l--center-y {
+  align-items: center !important;
+  display: flex !important;
+}
+
+.l--center-x {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.l--center-a {
+  align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+// Width/Height helpers
+
+
+.l--full-height {
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+.l--full-width {
+  width: 100% !important;
+}
+
+
+.l--border-round {
+  border-radius: 4px !important;
+}
+
+
+/* ==========  Spacing Classes ========== */
+
+// Generates classes for margins and padding. Examples:
+//
+//  .l--m-t-10 {
+//    margin-top: 10px !important;
+//  }
+//
+//  .l--p-l-30 {
+//    padding-left: 30px !important;
+//  }
+//
+//  .l--p-x-20: {
+//    padding-left: 20px !important;
+//    padding-right: 20px !importnat;
+//  }
+
+$props: (
+  margin: 'm',
+  padding: 'p'
+);
+
+@each $prop, $prop-abbr in $props {
+  @for $i from 0 through 10 {
+    .l--#{$prop-abbr}-a-#{$i} {
+      #{$prop}: #{$i}px !important;
+    }
+
+    .l--#{$prop-abbr}-t-#{$i} {
+      #{$prop}-top: #{$i}px !important;
+    }
+
+    .l--#{$prop-abbr}-b-#{$i} {
+      #{$prop}-bottom: #{$i}px !important;
+    }
+
+    .l--#{$prop-abbr}-r-#{$i} {
+      #{$prop}-right: #{$i}px !important;
+    }
+
+    .l--#{$prop-abbr}-l-#{$i} {
+      #{$prop}-left: #{$i}px !important;
+    }
+
+    .l--#{$prop-abbr}-x-#{$i} {
+      #{$prop}-left: #{$i}px !important;
+      #{$prop}-right: #{$i}px !important;
+    }
+
+    .l--#{$prop-abbr}-y-#{$i} {
+      #{$prop}-top: #{$i}px !important;
+      #{$prop}-bottom: #{$i}px !important;
+    }
+  }
+
+  @for $i from 3 through 20 {
+    .l--#{$prop-abbr}-a-#{$i * 5} {
+      #{$prop}: #{$i * 5}px !important;
+    }
+
+    .l--#{$prop-abbr}-t-#{$i * 5} {
+      #{$prop}-top: #{$i * 5}px !important;
+    }
+
+    .l--#{$prop-abbr}-b-#{$i * 5} {
+      #{$prop}-bottom: #{$i * 5}px !important;
+    }
+
+    .l--#{$prop-abbr}-r-#{$i * 5} {
+      #{$prop}-right: #{$i * 5}px !important;
+    }
+
+    .l--#{$prop-abbr}-l-#{$i * 5} {
+      #{$prop}-left: #{$i * 5}px !important;
+    }
+
+    .l--#{$prop-abbr}-x-#{$i * 5} {
+      #{$prop}-left: #{$i * 5}px !important;
+      #{$prop}-right: #{$i * 5}px !important;
+    }
+
+    .l--#{$prop-abbr}-y-#{$i * 5} {
+      #{$prop}-top: #{$i * 5}px !important;
+      #{$prop}-bottom: #{$i * 5}px !important;
+    }
+  }
+}
+
+// Placed at end so we can stomp component classes with default margins
+.l--m-b-0 { margin: 0 !important;}
+.l--m-t-0 { margin: 0 !important;}
+.l--m-a-0 { margin: 0 !important;}

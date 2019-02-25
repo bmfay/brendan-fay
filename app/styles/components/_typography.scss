@@ -1,0 +1,86 @@
+
+.t--error {
+  color: $color-error;
+}
+
+
+.t--show-line-breaks {
+  white-space: pre-line;
+}
+
+// Typography Helpers
+
+.t--weight-light {
+  font-weight: 300 !important;
+}
+
+.t--weight-regular {
+  font-weight: 400 !important;
+}
+
+.t--weight-heavy {
+  font-weight: 600 !important;
+}
+
+.t--capitalize {
+  text-transform: capitalize !important;
+}
+
+.t--uppercase {
+  text-transform: uppercase !important;
+}
+
+.t--lowercase {
+  text-transform: lowercase !important;
+}
+
+.t--underline {
+  text-decoration: underline !important;
+}
+
+.t--no-underline {
+  text-decoration: none !important;
+}
+
+.t--italicize {
+  font-style: italic !important;
+}
+
+.t--line-through {
+  text-decoration: line-through !important;
+}
+
+// Text alignment
+.t--center {
+  text-align: center !important;
+}
+
+.t--left {
+  text-align: left !important;
+}
+
+.t--right {
+  text-align: right !important;
+}
+
+.t--wordwrap {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.t--multiline {
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  width: 100%;
+}
+
+.t--wrap {
+  white-space: normal !important;
+}
+
+.t--overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

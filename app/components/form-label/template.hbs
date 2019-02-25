@@ -1,0 +1,27 @@
+{{#if (eq type 'checkbox')}}
+  <div class='l--center-y'>
+    <div class='l--m-r-20'>
+      {{yield}}
+    </div>
+    <span class='color-text l--p-b-5 t--body t--capitalize'>{{label}}</span>
+  </div>
+  {{#if (and displayErrors isInvalid)}}
+    <span class='t--error'>{{errorMessages}}</span>
+  {{/if}}
+{{else if (eq type 'radio')}}
+  <div class='l--center-y'>
+    {{yield}}
+    <span class='color-text l--m-l-5 l--m-b-2 t--body t--capitalize'>{{label}}</span>
+  </div>
+{{else}}
+  <div class='l--spread'>
+    <div class='t--capitalize'>{{label}}</div>
+    {{#if (and (and displayErrors isInvalid) (not errorsBelow))}}
+      <div class='form__error t--error'>{{errorMessages}}</div>
+    {{/if}}
+  </div>
+  {{yield}}
+  {{#if (and (and displayErrors isInvalid) errorsBelow)}}
+    <div class='t--error'>{{errorMessages}}</div>
+  {{/if}}
+{{/if}}
