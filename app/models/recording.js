@@ -8,6 +8,7 @@ const {
 export default DS.Model.extend({
   url: attr('string'),
   recordedOn: attr('date'),
+  isSoundcloud: attr('boolean'),
 
   composition: belongsTo('composition')
 });

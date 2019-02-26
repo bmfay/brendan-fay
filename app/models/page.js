@@ -8,6 +8,7 @@ const {
 export default DS.Model.extend({
   beginTime: attr('number'),
   cloudinaryId: attr('string'),
+  pageNumber: attr('number'),
 
   score: belongsTo('score')
 });

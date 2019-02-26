@@ -9,6 +9,6 @@ export default DS.Model.extend({
   description: attr('string'),
   title: attr('string'),
 
-  score: belongsTo('score'),
-  recording: belongsTo('recording'),
+  score: belongsTo('score', {async: false}),
+  recording: belongsTo('recording', {async: false}),
 });

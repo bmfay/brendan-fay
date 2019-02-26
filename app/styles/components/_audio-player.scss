@@ -1,0 +1,67 @@
+.audio-player {
+  display: flex;
+  width: 80%;
+  max-width: 800px;
+  border: 1px solid #474747;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  margin: 25px auto;
+  background-color: white;
+}
+
+.audio-player__play-pause {
+  width: 32px;
+  height: 30px;
+  cursor: pointer;
+  padding: 2px;
+}
+.audio-player__play-pause.amplitude-paused {
+  background: url("play.svg");
+  background-size: cover;
+}
+
+.audio-player__play-pause.amplitude-playing {
+  background: url("pause.svg");
+  background-size: cover;
+}
+
+.audio-player__time-and-progress {
+  display: flex;
+  align-items: center;
+
+  font-family: 'Open Sans';
+  font-weight: 100;
+  font-size: 12px;
+  color: black;
+  width: 100%;
+  margin-left: 15px;
+}
+
+.audio-player__progress-bar {
+  background-color: #524D48;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 7px;
+  display: block;
+  cursor: pointer;
+  border: none;
+  margin: 0 10px;
+}
+
+.audio-player__progress-bar.amplitude-song-played-progress:not([value]) {
+  background-color: #524D48;
+}
+
+.audio-player__progress-bar[value]::-webkit-progress-bar {
+  background-color: #524D48;
+}
+
+.audio-player__progress-bar[value]::-moz-progress-bar {
+  background-color: #A19889;
+}
+
+.audio-player__progress-bar[value]::-webkit-progress-value {
+  background-color: #A19889;
+}

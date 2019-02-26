@@ -19,6 +19,10 @@ Router.map(function() {
       this.route('edit', { path: '/:id' });
     });
   });
+
+  this.route('music', function() {
+    this.route('show', { path: '/:id' });
+  });
 });
 
 export default Router;

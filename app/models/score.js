@@ -7,5 +7,5 @@ const {
 
 export default DS.Model.extend({
   composition: belongsTo('composition'),
-  pages: hasMany('page'),
+  pages: hasMany('page', {async: false}),
 });

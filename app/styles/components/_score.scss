@@ -1,0 +1,54 @@
+.score-wrapper {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Score */
+
+.score {
+   width:1268px;
+   height:800px;
+   margin: 10px auto;
+   background: gainsboro;
+}
+
+.score .page {
+  background-color: white;
+  width:50%;
+  height:100%;
+}
+
+.score .page__inner img {
+  width: 100%;
+  height: 100%;
+}
+
+.score .even .page__inner {
+  margin: 0 8% 0 6%;
+}
+
+.score .odd .page__inner {
+ margin: 0 6% 0 8%;
+}
+
+.score .shadow{
+ box-shadow:0 4px 10px #666;
+}
+
+.score .even{
+ background:-webkit-gradient(linear, left top, right top, color-stop(0.95, #fff), color-stop(1, #dadada));
+ background-image:-webkit-linear-gradient(left, #fff 95%, #dadada 100%);
+ background-image:-moz-linear-gradient(left, #fff 95%, #dadada 100%);
+ background-image:-ms-linear-gradient(left, #fff 95%, #dadada 100%);
+ background-image:-o-linear-gradient(left, #fff 95%, #dadada 100%);
+ background-image:linear-gradient(left, #fff 95%, #dadada 100%);
+}
+
+.score .odd{
+ background:-webkit-gradient(linear, right top, left top, color-stop(0.95, #fff), color-stop(1, #cacaca));
+ background-image:-webkit-linear-gradient(right, #fff 95%, #cacaca 100%);
+ background-image:-moz-linear-gradient(right, #fff 95%, #cacaca 100%);
+ background-image:-ms-linear-gradient(right, #fff 95%, #cacaca 100%);
+ background-image:-o-linear-gradient(right, #fff 95%, #cacaca 100%);
+ background-image:linear-gradient(right, #fff 95%, #cacaca 100%);
+}

@@ -10,7 +10,10 @@ export default Component.extend({
       return this.store.createRecord('score', {composition: composition}).save();
     },
     addPage(score) {
-      return this.store.createRecord('page', {score: score});
+      return this.store.createRecord('page', {
+        score: score,
+        pageNumber: score.pages.length + 1,
+      });
     },
     savePage(page) {
       return page.save();
@@ -19,9 +22,7 @@ export default Component.extend({
       return this.store.createRecord('recording', {composition: composition});
     },
     saveRecording(recording) {
-      return recording.then(recording => {
-        return recording.save();
-      });
+      return recording.save();
     }
   }
 });

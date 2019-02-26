@@ -1,1 +1,5 @@
-{{outlet}}
+{{#each model as |composition|}}
+  {{#link-to 'admin.compositions.edit' composition.id}}
+    {{composition.title}}
+  {{/link-to}}
+{{/each}}

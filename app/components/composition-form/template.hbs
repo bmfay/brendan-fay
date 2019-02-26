@@ -12,9 +12,9 @@
   <div class='form__section'>
     <h2>Score</h2>
     {{#if composition.score}}
-      {{#each composition.score.pages as |page index|}}
+      {{#each (sort-by 'pageNumber' composition.score.pages) as |page|}}
         <div class='form__subsection'>
-          <div>Page {{inc index}}</div>
+          <div>Page {{page.pageNumber}}</div>
           {{#cloudinary-upload
             model=page
             description='Upload Image'
@@ -29,6 +29,9 @@
 
           {{#form-label label='Begin Time (seconds)' errors=page.errors.beginTime}}
             {{input value=page.beginTime}}
+          {{/form-label}}
+          {{#form-label label='Page Number' errors=page.errors.pageNumber}}
+            {{input value=page.pageNumber}}
           {{/form-label}}
           <button {{action 'savePage' page}}>
             Save Page
