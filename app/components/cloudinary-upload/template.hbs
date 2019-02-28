@@ -1,4 +1,4 @@
-<input type='file' name='file' style='display: none'>
+<input type='file' name='file' class='l--hidden'>
 
 {{#if cloudinaryId}}
   <div class='image-upload__image-container'>
@@ -14,7 +14,7 @@
       width=imageWidth
       height=imageHeight
       crop=crop
-      class='image-upload__image'
+      class=imagePreviewClass
     }}
   </div>
 {{else if isUploading}}

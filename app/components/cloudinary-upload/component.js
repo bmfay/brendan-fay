@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import $ from "jquery"
 import ENV from 'brendan-fay/config/environment';
 import { computed, get, set } from '@ember/object';
-import { isBlank } from '@ember/utils';
+import { isBlank, isPresent } from '@ember/utils';
 
 export default Component.extend({
   model: null,
@@ -17,6 +17,7 @@ export default Component.extend({
   classNames: ['image-upload'],
   imageClass: '',
   description: 'Upload Mock',
+  uploadType: null,
 
   // Allow files to be dropped into a larger area that wraps this component
   dropZoneElement: null,
@@ -28,7 +29,10 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    const uploadPreset = get(this, 'uploadPreset');
+    let uploadPreset = ENV.cloudinary.defaultUploadPreset;
+    if (isPresent(get(this, 'uploadType'))) {
+      uploadPreset = `${ENV.environment}_${get(this, 'uploadType')}`;
+    }
     this.input().unsigned_cloudinary_upload(
       uploadPreset, {
         cloud_name: ENV.cloudinary.name,
@@ -70,6 +74,10 @@ export default Component.extend({
     return this.$('input');
   },
 
+  imagePreviewClass: computed('imageClass', function() {
+    return `${get(this, 'imageClass')} image-upload__image`;
+  }),
+
   dropZone: computed('dropZoneElement', function() {
     const dropZoneElement = get(this,  'dropZoneElement');
 
@@ -79,8 +87,6 @@ export default Component.extend({
       return this.$();
     }
   }),
-
-  uploadPreset: ENV.cloudinary.documentUploadPreset,
 
   cloudinaryImgLink: computed('cloudinaryId', function(){
     const cl = cloudinary.Cloudinary.new({cloud_name: ENV.cloudinary.name});

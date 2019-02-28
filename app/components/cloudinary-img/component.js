@@ -6,19 +6,26 @@ import Component from '@ember/component';
 
 export default Component.extend({
   tagName: 'img',
-  attributeBindings: ['src', 'imgWidth:width', 'imgHeight:height'],
+  attributeBindings: ['noDprSrc:data-src', 'imgWidth:width', 'imgHeight:height'],
+  classNames: ["cld-hidpi", "cld-responsive"],
 
   // Cloudinary Image Options
   width: null,
   height: null,
   crop: null,
   cloudinaryId: null,
+  dpr: 'auto',
 
-  src: computed('width', 'height', 'crop', 'cloudinaryId', function() {
+  didInsertElement() {
+    this._super(...arguments);
+    this.$().cloudinary_update({round_dpr: true});
+  },
+
+  noDprSrc: computed('width', 'height', 'crop', 'dpr', 'cloudinaryId', function() {
     const cloudinaryId = get(this, 'cloudinaryId');
 
     const opts = {};
-    ['width', 'height', 'crop'].forEach(property => {
+    ['width', 'height', 'crop', 'dpr'].forEach(property => {
       if (isPresent(get(this, property))) {
         opts[property] = get(this, property);
       }
@@ -27,6 +34,6 @@ export default Component.extend({
     const cl = cloudinary.Cloudinary.new({cloud_name: ENV.cloudinary.name});
     const cloudinaryUrl = cl.url(cloudinaryId, opts);
 
-    return `${cloudinaryUrl}.png`;
+    return `${cloudinaryUrl}.jpg`;
   }),
 });

@@ -1,16 +1,13 @@
+/* global Amplitude */
 import Component from '@ember/component';
 import $ from "jquery"
 import ENV from 'brendan-fay/config/environment';
-import { computed, get, set } from '@ember/object';
-import { isBlank } from '@ember/utils';
-import { sort } from '@ember/object/computed'
-
+import { computed } from '@ember/object';
 
 export default Component.extend({
   composition: null,
 
   sortedPages: computed('composition.score.pages.@each.pageNumber', function() {
-    const sp = this.composition.score.pages.sortBy('pageNumber');
     return this.composition.score.pages.sortBy('pageNumber');
   }),
   oddPages: computed('sortedPages.@each.beginTime', function() {
@@ -42,8 +39,6 @@ export default Component.extend({
         'time_update': function(){
 					const currentTime = Amplitude.getSongPlayedSeconds();
 					const currentPageNumber = $flipbook.turn("page");
-          console.log(currentTime);
-          console.log(currentPageNumber);
 					oddPages.forEach(function(page, index) {
 						const pageNumber = page.pageNumber + INITIAL_PAGE_OFFSET;
 
@@ -75,88 +70,87 @@ export default Component.extend({
   },
 
   initializeScoreViewer(scoreElement, pageOffset) {
-		const scoreModule = {
-			ratio: 1.585,
-			init: function (element, pageOffset, totalPages) {
-				const _this = this;
+    const scoreModule = {
+      ratio: 1.585,
+      init: function (element, pageOffset, totalPages) {
+        const _this = this;
 
-				// if older browser then don't run javascript
-				if (document.addEventListener) {
-					this.el = element;
-					this.pageOffset = pageOffset;
-					this.resize();
-					this.initializeTurn(totalPages);
+        // if older browser then don't run javascript
+        if (document.addEventListener) {
+          this.el = element;
+          this.pageOffset = pageOffset;
+          this.resize();
+          this.initializeTurn(totalPages);
 
 
-					// on window resize, update the plugin size
-					window.addEventListener('resize', function (e) {
-						const size = _this.resize();
-						$(_this.el).turn('size', size.width, size.height);
-					});
-				}
-			},
-			resize: function () {
-				// reset the width and height to the css defaults
-				this.el.style.width = '';
-				this.el.style.height = '';
+          // on window resize, update the plugin size
+          window.addEventListener('resize', function () {
+            const size = _this.resize();
+            $(_this.el).turn('size', size.width, size.height);
+          });
+        }
+      },
+      resize: function () {
+        // reset the width and height to the css defaults
+        this.el.style.width = '';
+        this.el.style.height = '';
 
-				const availWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-				const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-				const availHeight = viewportHeight - 140; // leave room for audio player
+        const availWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        const viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        const availHeight = viewportHeight - 140; // leave room for audio player
 
-				let width, height;
+        let width, height;
 
-				if ((availWidth / availHeight) >= this.ratio) {
-					// we have more width than we need, height should limit
-					height = availHeight;
-					width = Math.round(height * this.ratio);
-				} else {
-					// we have more height than we need, width should limit;
-					width = availWidth;
-					height = Math.round(width / this.ratio);
-				}
+        if ((availWidth / availHeight) >= this.ratio) {
+          // we have more width than we need, height should limit
+          height = availHeight;
+          width = Math.round(height * this.ratio);
+        } else {
+          // we have more height than we need, width should limit;
+          width = availWidth;
+          height = Math.round(width / this.ratio);
+        }
 
-				// set the width and height matching the aspect ratio
-				this.el.style.width = width + 'px';
-				this.el.style.height = height + 'px';
+        // set the width and height matching the aspect ratio
+        this.el.style.width = width + 'px';
+        this.el.style.height = height + 'px';
 
-				return {
-					width: width,
-					height: height
-				};
-			},
-			initializeTurn: function (totalPages) {
-				// Check if the CSS was already loaded
-				const $flipbook = $(this.el);
+        return {
+          width: width,
+          height: height
+        };
+      },
+      initializeTurn: function (totalPages) {
+        // Check if the CSS was already loaded
+        const $flipbook = $(this.el);
 
-				if ($flipbook.width()==0 || $flipbook.height()==0) {
-					setTimeout(this.initializeTurn, 10);
-					return;
-				}
+        if ($flipbook.width()==0 || $flipbook.height()==0) {
+          setTimeout(this.initializeTurn, 10);
+          return;
+        }
 
-				$flipbook.turn({
-					elevation: 50,
-					acceleration: true, //TODO: isChrome,
-					autoCenter: false,
-					gradients: true,
-					duration: 3000,
-					page: 1 + this.pageOffset,
-					pages: totalPages,
-					when: {
-						start: function(event, pageObject, corner) {
-							if (pageObject.next==1)
-							event.preventDefault();
-						},
-						turning: function(event, page, view) {
-							if (page==1)
-							event.preventDefault();
-						}
-					}
-				});
+        $flipbook.turn({
+          elevation: 50,
+          acceleration: true, //TODO: isChrome,
+          autoCenter: false,
+          gradients: true,
+          duration: 3000,
+          page: 1 + this.pageOffset,
+          pages: totalPages,
+          when: {
+            start: function(event, pageObject) {
+              if (pageObject.next==1)
+              event.preventDefault();
+            },
+            turning: function(event, page) {
+              if (page==1)
+              event.preventDefault();
+            }
+          }
+        });
       }
-  	};
+    };
 
-  	scoreModule.init(scoreElement, pageOffset, this.composition.score.pages.length);
-
+    scoreModule.init(scoreElement, pageOffset, this.composition.score.pages.length);
   }
 });

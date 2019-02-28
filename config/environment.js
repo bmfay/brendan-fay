@@ -33,7 +33,7 @@ module.exports = function(environment) {
 
     ENV['cloudinary'] = {
       name: process.env.CLOUDINARY_CLOUD_NAME,
-      documentUploadPreset: "development",
+      defaultUploadPreset: "development_misc",
     };
   }
 
@@ -53,7 +53,7 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV['cloudinary'] = {
       name: process.env.CLOUDINARY_CLOUD_NAME,
-      documentUploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
+      defaultUploadPreset: "production_misc",
     };
   }
 
