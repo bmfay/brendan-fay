@@ -1,5 +1,11 @@
 {{#each model as |composition|}}
-  {{#link-to 'admin.compositions.edit' composition.id}}
-    {{composition.title}}
-  {{/link-to}}
+  <div class='l--flex'>
+    <div>{{composition.title}}</div>
+    {{#link-to 'admin.compositions.edit' composition.id class='l--m-l-20'}}
+      Edit
+    {{/link-to}}
+    <button {{action 'delete' composition}} class='l--m-l-20'>
+      Delete
+    </button>
+  </div>
 {{/each}}

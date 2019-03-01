@@ -3,22 +3,30 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   composition: null,
+  score: computed.reads('composition.score'),
   initialPageOffset: 1,
   ratio: 1.585,
   audioPlayerRoom: 140,
   shouldAutoResize: true,
+  isPreview: false,
+  scoreClass: '',
 
-  sortedPages: computed('composition.score.pages.@each.pageNumber', function() {
-    return this.composition.score.pages.sortBy('pageNumber');
+  sortedPages: computed('score.pages.@each.pageNumber', function() {
+    const sortedPages = this.score.pages.sortBy('pageNumber');
+    if (this.isPreview) {
+      return sortedPages.filter((page, index) => index < 2);
+    } else {
+      return sortedPages;
+    }
   }),
   sortedOddPagesArray: computed('sortedPages.@each.beginTime', function() {
     return this.sortedPages.filter(page => (page.pageNumber % 2) == 1).toArray();
   }),
-  showExtraBlankPage: computed('composition.score.pages.[]', function() {
-    return (this.composition.score.pages.length % 2) == 1;
+  showExtraBlankPage: computed('sortedPages.[]', function() {
+    return (this.sortedPages.length % 2) == 1;
   }),
-  totalPageCount: computed('showExtraBlankPage', 'composition.score.pages.[]', 'initialPageOffset', function() {
-    const basePageCount = this.composition.score.pages.length + this.initialPageOffset;
+  totalPageCount: computed('showExtraBlankPage', 'score.pages.[]', 'initialPageOffset', function() {
+    const basePageCount = this.score.pages.length + this.initialPageOffset;
     return this.showExtraBlankPage ? basePageCount + 1 : basePageCount;
   }),
 

@@ -1,17 +1,10 @@
-<div class='score-wrapper'>
-  <div class='score'>
-    <div></div>
-    {{#each sortedPages as |page|}}
-      <div>
-        <div class='page__inner'>
-          {{cloudinary-img
-          cloudinaryId=page.cloudinaryId}}
-        </div>
-      </div>
-    {{/each}}
-    {{#if showExtraBlankPage}}
-      <div></div>
-    {{/if}}
-  </div>
+{{#if isPreview}}
+  {{#link-to 'main.music.show' composition.id}}
+    {{score-viewer/score sortedPages=sortedPages showExtraBlankPage=showExtraBlankPage class=scoreClass}}
+  {{/link-to}}
+{{else}}
+  {{score-viewer/score sortedPages=sortedPages showExtraBlankPage=showExtraBlankPage class=scoreClass}}
+{{/if}}
+{{#if (and composition.recording (not isPreview))}}
   {{audio-player handleTimeUpdate=(action 'handleRecordingTimeUpdate') recording=composition.recording}}
-</div>
+{{/if}}

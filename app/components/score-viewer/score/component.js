@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  composition: null,
-  classNames: ['composition'],
+  classNames: ['score'],
+  showExtraBlankPage: false,
+  sortedPages: null,
 });

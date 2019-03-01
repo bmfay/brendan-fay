@@ -6,6 +6,6 @@ export default Controller.extend({
       return composition.save().then(() => {
         this.transitionToRoute('admin.compositions.index');
       });
-    }
+    },
   }
 });

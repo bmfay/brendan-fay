@@ -15,14 +15,8 @@ export default Component.extend({
         pageNumber: score.pages.length + 1,
       });
     },
-    savePage(page) {
-      return page.save();
-    },
     addRecording(composition) {
       return this.store.createRecord('recording', {composition: composition});
     },
-    saveRecording(recording) {
-      return recording.save();
-    }
   }
 });

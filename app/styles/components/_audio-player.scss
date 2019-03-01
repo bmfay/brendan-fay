@@ -12,18 +12,15 @@
 
 .audio-player__play-pause {
   width: 32px;
-  height: 30px;
+  height: 32px;
   cursor: pointer;
-  padding: 2px;
-}
-.audio-player__play-pause.amplitude-paused {
   background: url("play.svg");
-  background-size: cover;
+  background-size: 100% 100%;
 }
 
 .audio-player__play-pause.amplitude-playing {
   background: url("pause.svg");
-  background-size: cover;
+  background-size: 100% 100%;
 }
 
 .audio-player__time-and-progress {

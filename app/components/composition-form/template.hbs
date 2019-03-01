@@ -8,6 +8,16 @@
   {{textarea value=composition.description}}
 {{/form-label}}
 
+<div class='l--flex'>
+  <button {{action save composition}} class='button--main'>
+    Save Composition Details
+  </button>
+
+  <button {{action 'delete' composition}} class='l--m-l-20'>
+    Delete Composition
+  </button>
+</div>
+
 {{#unless composition.isNew}}
   <div class='form__section'>
     <h2>Score</h2>
@@ -34,7 +44,7 @@
           {{#form-label label='Page Number' errors=page.errors.pageNumber}}
             {{input value=page.pageNumber}}
           {{/form-label}}
-          <button {{action 'savePage' page}}>
+          <button {{action 'save' page}}>
             Save Page
           </button>
         </div>
@@ -66,7 +76,7 @@
       {{#form-label label='Url' errors=composition.recording.errors.url}}
         {{textarea value=composition.recording.url}}
       {{/form-label}}
-      <button {{action 'saveRecording' composition.recording}}>
+      <button {{action 'save' composition.recording}}>
         Save Recording
       </button>
     {{else}}
@@ -76,7 +86,3 @@
     {{/if}}
   </div>
 {{/unless}}
-
-<button {{action save composition}} class='button--main'>
-  Save Composition Details
-</button>

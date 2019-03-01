@@ -1,0 +1,12 @@
+<div></div>
+{{#each sortedPages as |page|}}
+  <div>
+    <div class='page__inner'>
+      {{cloudinary-img
+      cloudinaryId=page.cloudinaryId}}
+    </div>
+  </div>
+{{/each}}
+{{#if showExtraBlankPage}}
+  <div></div>
+{{/if}}

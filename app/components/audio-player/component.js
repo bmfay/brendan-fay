@@ -10,31 +10,32 @@ export default Component.extend({
     const _this = this;
     const recording = this.recording;
 
-		Amplitude.init({
-			"bindings": {
-				32: 'play_pause'
-			},
-			"songs": [
-				{
-					"name": recording.title,
-					"url": recording.url,
-				}
-			],
+    Amplitude.init({
+      "bindings": {
+        32: 'play_pause'
+      },
+      "songs": [
+        {
+          "url": recording.url,
+        }
+      ],
       soundcloud_client: ENV.soundcloudClientId,
 
-			"callbacks": {
+      "callbacks": {
         'time_update': function() {
-					_this.handleTimeUpdate(Amplitude.getSongPlayedSeconds());
-				}
-			}
-		});
+          if (_this.handleTimeUpdate) {
+            _this.handleTimeUpdate(Amplitude.getSongPlayedSeconds());
+          }
+        }
+      }
+    });
 
     window.onkeydown = function(e) {
       return !(e.keyCode == 32);
     };
 
     /*
-      Handles a click on the song played progress bar.
+    Handles a click on the song played progress bar.
     */
     this.$('.audio-player__progress-bar').click(function( e ){
       const offset = this.getBoundingClientRect();

@@ -8,7 +8,9 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('main', { path: '/' }, function() {
-    this.route('music');
+    this.route('music', function() {
+      this.route('show', { path: '/:id' });
+    });
     this.route('photo');
     this.route('film');
     this.route('misc');
@@ -18,10 +20,6 @@ Router.map(function() {
       this.route('new');
       this.route('edit', { path: '/:id' });
     });
-  });
-
-  this.route('music', function() {
-    this.route('show', { path: '/:id' });
   });
 });
 

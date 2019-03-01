@@ -1,0 +1,19 @@
+<div class='composition__info'>
+  {{#if composition.score}}
+    {{score-viewer
+      composition=composition
+      shouldAutoResize=false
+      isPreview=true
+      scoreClass='composition__score'
+    }}
+  {{/if}}
+  <div class='composition__text'>
+    <h2 class='composition__title'>Death on a Deadline</h2>
+    <div class='composition__details'>
+      {{composition.descriptionHtmlSafe}}
+    </div>
+  </div>
+</div>
+{{#if composition.recording.url}}
+  {{audio-player recording=composition.recording}}
+{{/if}}
