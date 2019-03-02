@@ -6,5 +6,9 @@
   {{score-viewer/score sortedPages=sortedPages showExtraBlankPage=showExtraBlankPage class=scoreClass}}
 {{/if}}
 {{#if (and composition.recording (not isPreview))}}
-  {{audio-player handleTimeUpdate=(action 'handleRecordingTimeUpdate') recording=composition.recording}}
+  {{audio-player
+    recording=composition.recording
+    handleTimeUpdate=(action 'handleRecordingTimeUpdate')
+    handlePlay=(action 'handleRecordingPlay')
+    handleStop=(action 'handleRecordingStop')}}
 {{/if}}

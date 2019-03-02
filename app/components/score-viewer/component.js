@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { set } from "@ember/object";
 
 export default Component.extend({
   composition: null,
@@ -10,6 +11,7 @@ export default Component.extend({
   shouldAutoResize: true,
   isPreview: false,
   scoreClass: '',
+  isPlaying: false,
 
   sortedPages: computed('score.pages.@each.pageNumber', function() {
     const sortedPages = this.score.pages.sortBy('pageNumber');
@@ -92,6 +94,7 @@ export default Component.extend({
       autoCenter: false,
       gradients: true,
       duration: 3000,
+      disabled: true,
       page: 1 + _this.initialPageOffset,
       pages: _this.totalPageCount,
       when: {
@@ -105,13 +108,35 @@ export default Component.extend({
         }
       }
     });
+
+    if (!this.isPreview) {
+      $score.find('.odd').click(() => {
+        if (!$score.turn('animating') && !_this.isPlaying) {
+          $score.turn("next");
+        }
+      });
+      $score.find('.even').click(() => {
+        if (!$score.turn('animating') && !_this.isPlaying) {
+          $score.turn("previous");
+        }
+      });
+    }
   },
 
   actions: {
+    handleRecordingPlay() {
+      this.$(".score").turn("allowManualPageTurn", false);
+      set(this, 'isPlaying', true);
+    },
+    handleRecordingStop() {
+      this.$(".score").turn("allowManualPageTurn", true);
+      set(this, 'isPlaying', false);
+    },
+
     handleRecordingTimeUpdate(timeInSeconds) {
       const oddPages = this.sortedOddPagesArray;
-      const $flipbook = this.$(".score");
-      const currentPageNumber = $flipbook.turn("page");
+      const $score = this.$(".score");
+      const currentPageNumber = $score.turn("page");
       const _this = this;
 
       oddPages.forEach(function(page, index) {
@@ -119,9 +144,9 @@ export default Component.extend({
 
         if (timeInSeconds > page.beginTime && currentPageNumber !== pageNumber) {
           if (index == (oddPages.length - 1)) {
-            $flipbook.turn("page", pageNumber)
+            $score.turn("page", pageNumber)
           } else if (timeInSeconds < oddPages[index + 1].beginTime) {
-            $flipbook.turn("page", pageNumber)
+            $score.turn("page", pageNumber)
           }
         }
       });

@@ -26,7 +26,16 @@ export default Component.extend({
           if (_this.handleTimeUpdate) {
             _this.handleTimeUpdate(Amplitude.getSongPlayedSeconds());
           }
-        }
+        },
+        'after_play': function() {
+          if (_this.handlePlay) { _this.handlePlay(); }
+        },
+        'after_stop': function() {
+          if (_this.handleStop) { _this.handleStop(); }
+        },
+        'after_pause': function() {
+          if (_this.handleStop) { _this.handleStop(); }
+        },
       }
     });
 

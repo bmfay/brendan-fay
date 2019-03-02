@@ -27,7 +27,7 @@ module.exports = function(defaults) {
   app.import('node_modules/blueimp-file-upload/js/jquery.fileupload.js');
   app.import('node_modules/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js');
   app.import('node_modules/amplitudejs/dist/amplitude.js');
-  app.import('vendor/turn.min.js');
+  app.import('vendor/turn.js');
 
   return app.toTree();
 };
