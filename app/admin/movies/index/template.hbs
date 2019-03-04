@@ -1,0 +1,15 @@
+{{#each model as |movie|}}
+  <div class='l--flex'>
+    <div>{{movie.title}}</div>
+    {{#link-to 'admin.movies.edit' movie.id class='l--m-l-20'}}
+      Edit
+    {{/link-to}}
+    <button {{action 'delete' movie}} class='l--m-l-20'>
+      Delete
+    </button>
+  </div>
+{{/each}}
+
+{{#link-to 'admin.movies.new' class='l--m-l-20'}}
+  New Movie
+{{/link-to}}

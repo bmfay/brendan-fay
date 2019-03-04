@@ -1,3 +1,18 @@
+{{top-nav}}
 <div class='l--p-a-20'>
-  {{outlet}}
+  <div class='l--flex'>
+    <div class='l--p-r-30'>
+      <h1> Admin </h1>
+      {{#link-to 'admin.compositions' class='admin__nav-link'}}
+        music
+      {{/link-to}}
+      {{#link-to 'admin.movies' class='admin__nav-link'}}
+        movies
+      {{/link-to}}
+
+    </div>
+    <div class='l--full-width'>
+      {{outlet}}
+    </div>
+  </div>
 </div>

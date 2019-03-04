@@ -1,0 +1,12 @@
+.admin__nav-link {
+  font-size: 1.4rem;
+  display: block;
+  margin: 10px 0 20px;
+  font-weight: 100;
+  text-decoration: none;
+}
+
+.admin__nav-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+}

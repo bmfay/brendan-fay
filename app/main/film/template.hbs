@@ -1,2 +1,7 @@
 {{top-nav}}
-{{outlet}}
+
+<div class='container'>
+  {{#each model as |movie|}}
+    {{movie-block movie=movie}}
+  {{/each}}
+</div>

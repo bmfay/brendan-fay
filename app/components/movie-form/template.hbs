@@ -1,0 +1,34 @@
+<h1>Movie Form</h1>
+
+{{#form-label label='Title' errors=movie.errors.title}}
+  {{input value=movie.title}}
+{{/form-label}}
+
+{{#form-label label='Url' errors=movie.errors.url}}
+  {{input value=movie.url}}
+{{/form-label}}
+
+{{#form-label label='Description' errors=movie.errors.description}}
+  {{textarea value=movie.description}}
+{{/form-label}}
+
+{{#form-label label='Creation Date' errors=movie.errors.creationDate}}
+  {{pikaday-input
+    value=movie.creationDate
+    placeholder='Creation Date'
+    format='MMMM Do, YYYY'
+    firstDay=0
+    useUTC=true
+    onSelection=(action (mut movie.creationDate))
+  }}
+{{/form-label}}
+
+<button {{action 'save' movie}}>
+  Save
+</button>
+
+{{#unless movie.isNew}}
+  <h2> Preview: </h2>
+
+  {{movie-block movie=movie}}
+{{/unless}}

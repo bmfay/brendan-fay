@@ -23,7 +23,7 @@
   margin-bottom: 20px;
   text-align: center;
 }
-.form h2 {
+.form h2:not(.movie__title) {
   margin-bottom: 10px;
 }
 
@@ -46,4 +46,13 @@ label {
   font-size: 1.46em;
   margin-bottom: 15px;
   display: block;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+}
+
+input {
+  width: 100%;
 }
