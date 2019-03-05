@@ -24,6 +24,10 @@ Router.map(function() {
       this.route('edit', { path: '/:id' });
       this.route('new');
     });
+    this.route('photo-albums', function() {
+      this.route('new');
+      this.route('edit', { path: '/:id' });
+    });
   });
 });
 

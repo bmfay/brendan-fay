@@ -1,0 +1,66 @@
+<h1>Photo Album Form</h1>
+
+{{#form-label label='Title' errors=photoAlbum.errors.title}}
+  {{input value=photoAlbum.title}}
+{{/form-label}}
+
+{{#form-label label='Description' errors=photoAlbum.errors.description}}
+  {{textarea value=photoAlbum.description}}
+{{/form-label}}
+
+{{#form-label label='Creation Date' errors=photoAlbum.errors.creationDate}}
+  {{pikaday-input
+    value=photoAlbum.creationDate
+    placeholder='Recorded On'
+    format='MMMM Do, YYYY'
+    firstDay=0
+    useUTC=true
+    onSelection=(action (mut photoAlbum.creationDate))
+  }}
+{{/form-label}}
+
+<div class='l--flex'>
+  <button {{action 'save' photoAlbum}} class='button--main'>
+    Save Album Details
+  </button>
+
+  <button {{action 'delete' photoAlbum}} class='l--m-l-20'>
+    Delete Album
+  </button>
+</div>
+
+{{#unless photoAlbum.isNew}}
+  <div class='form__section'>
+    <h2>Photos</h2>
+    {{#each (sort-by 'position' photoAlbum.photos) as |photo|}}
+      <div class='form__subsection'>
+        <div>Page {{photo.photoNumber}}</div>
+        {{#cloudinary-upload
+          model=photo
+          description='Upload Image'
+          attribute='cloudinaryId'
+          imageHeight=300
+          imageClass='form__score-page-thumb'
+          crop='limit'
+          uploadType='photo'
+          cloudinaryId=photo.cloudinaryId
+        }}
+          <span>Upload Photo</span>
+        {{/cloudinary-upload}}
+
+        {{#form-label label='Title/Caption' errors=page.errors.title}}
+          {{input value=page.title}}
+        {{/form-label}}
+        {{#form-label label='Position' errors=page.errors.position}}
+          {{input value=page.position}}
+        {{/form-label}}
+        <button {{action 'save' photo}}>
+          Save Photo
+        </button>
+      </div>
+    {{/each}}
+    <button {{action 'addPhoto' photoAlbum}}>
+      Add Photo
+    </button>
+  </div>
+{{/unless}}

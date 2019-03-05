@@ -1,0 +1,15 @@
+{{#each model as |album|}}
+  <div class='l--flex'>
+    <div>{{album.title}}</div>
+    {{#link-to 'admin.photo-albums.edit' album.id class='l--m-l-20'}}
+      Edit
+    {{/link-to}}
+    <button {{action 'delete' album}} class='l--m-l-20'>
+      Delete
+    </button>
+  </div>
+{{/each}}
+
+{{#link-to 'admin.photo-albums.new' class='l--m-l-20'}}
+  New Album
+{{/link-to}}
