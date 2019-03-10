@@ -1,6 +1,7 @@
 {
   "name": "brendan-fay",
   "dependencies": {
-    "ember-cli-shims": "~0.1.1"
+    "ember-cli-shims": "~0.1.1",
+    "photoswipe": "4.1.0"
   }
 }

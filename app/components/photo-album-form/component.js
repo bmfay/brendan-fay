@@ -8,7 +8,7 @@ export default Component.extend({
   actions: {
     addPhoto(album) {
       return this.store.createRecord('photo', {
-        album: album,
+        photoAlbum: album,
         position: album.photos.length + 1,
       });
     },

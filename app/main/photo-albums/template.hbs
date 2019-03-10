@@ -1,0 +1,9 @@
+{{top-nav}}
+
+<div class='container'>
+  {{#each model as |photoAlbum|}}
+    {{photo-album-block photoAlbum=photoAlbum}}
+  {{/each}}
+</div>
+
+{{outlet}}

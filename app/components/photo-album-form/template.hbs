@@ -11,7 +11,7 @@
 {{#form-label label='Creation Date' errors=photoAlbum.errors.creationDate}}
   {{pikaday-input
     value=photoAlbum.creationDate
-    placeholder='Recorded On'
+    placeholder='Creation Date'
     format='MMMM Do, YYYY'
     firstDay=0
     useUTC=true
@@ -34,7 +34,7 @@
     <h2>Photos</h2>
     {{#each (sort-by 'position' photoAlbum.photos) as |photo|}}
       <div class='form__subsection'>
-        <div>Page {{photo.photoNumber}}</div>
+        <div>Photo {{photo.position}}</div>
         {{#cloudinary-upload
           model=photo
           description='Upload Image'
@@ -48,11 +48,11 @@
           <span>Upload Photo</span>
         {{/cloudinary-upload}}
 
-        {{#form-label label='Title/Caption' errors=page.errors.title}}
-          {{input value=page.title}}
+        {{#form-label label='Title/Caption' errors=photo.errors.title}}
+          {{input value=photo.title}}
         {{/form-label}}
-        {{#form-label label='Position' errors=page.errors.position}}
-          {{input value=page.position}}
+        {{#form-label label='Position' errors=photo.errors.position}}
+          {{input value=photo.position}}
         {{/form-label}}
         <button {{action 'save' photo}}>
           Save Photo

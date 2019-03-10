@@ -11,9 +11,11 @@ Router.map(function() {
     this.route('music', function() {
       this.route('show', { path: '/:id' });
     });
-    this.route('photo');
     this.route('film');
     this.route('misc');
+    this.route('photo-albums', { path: 'photo' }, function() {
+      this.route('show', { path: '/:id' });
+    });
   });
   this.route('admin', function() {
     this.route('compositions', function() {

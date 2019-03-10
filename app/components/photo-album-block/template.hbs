@@ -1,0 +1,13 @@
+{{#photo-swipe
+  items=photoSwipePhotos
+  shareEl=false
+  zoomEl=false
+  preload=(array 1 1)
+  closeOnScroll=false
+  showAnimationDuration=0
+  as |photoswipe|
+}}
+  <img
+    class='photo-album__thumb'
+    src={{photoSwipePhotos.firstObject.src}} {{action photoswipe.actions.open (hash index=0)}} />
+{{/photo-swipe}}
