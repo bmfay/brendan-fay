@@ -14,7 +14,11 @@ Router.map(function() {
     this.route('film');
     this.route('misc');
     this.route('photo-albums', { path: 'photo' }, function() {
-      this.route('show', { path: '/:id' });
+      this.route('show', { path: '/:id' }, function() {
+        this.route('photos', function() {
+          this.route('show', { path: '/:photo_id' });
+        });
+      });
     });
   });
   this.route('admin', function() {

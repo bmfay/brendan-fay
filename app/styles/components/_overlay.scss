@@ -1,0 +1,10 @@
+.overlay {
+  background: $color-background;
+  height: 100%;
+  left: 0;
+  overflow-y: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}

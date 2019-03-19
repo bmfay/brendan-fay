@@ -59,6 +59,12 @@ export default Component.extend({
       const model = get(this, 'model');
 
       set(model, get(this, 'attribute'), data.result.public_id);
+
+      model.setProperties({
+        originalWidth: data.result.width,
+        originalHeight: data.result.height,
+      })
+      
       set(this, 'cloudinaryId', data.result.public_id);
 
       get(this, 'model').save();

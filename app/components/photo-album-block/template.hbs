@@ -1,13 +1,11 @@
-{{#photo-swipe
-  items=photoSwipePhotos
-  shareEl=false
-  zoomEl=false
-  preload=(array 1 1)
-  closeOnScroll=false
-  showAnimationDuration=0
-  as |photoswipe|
-}}
-  <img
+{{#link-to 'main.photo-albums.show.photos.show' photoAlbum.id photoAlbum.photos.firstObject.id tagName='h2'}}
+  {{photoAlbum.title}}
+{{/link-to}}
+
+{{#link-to 'main.photo-albums.show.photos.show' photoAlbum.id photoAlbum.photos.firstObject.id}}
+  {{cloudinary-img
+    cloudinaryId=sortedPhotos.firstObject.cloudinaryId
     class='photo-album__thumb'
-    src={{photoSwipePhotos.firstObject.src}} {{action photoswipe.actions.open (hash index=0)}} />
-{{/photo-swipe}}
+    width=width
+  }}
+{{/link-to}}

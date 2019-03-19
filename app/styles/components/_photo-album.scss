@@ -3,6 +3,16 @@
   border: 3px solid $color-text;
 }
 
+.photo-album__photo--wide {
+  width: 100%;
+  height: auto;
+}
+
+.photo-album__photo--tall {
+  height: 100%;
+  width: auto;
+}
+
 .pswp__img--placeholder--blank {
   background-color: transparent;
 }
