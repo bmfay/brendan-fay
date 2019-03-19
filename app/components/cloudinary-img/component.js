@@ -1,5 +1,6 @@
 /* global cloudinary */
 import ENV from 'brendan-fay/config/environment';
+import breakpoints from 'brendan-fay/lib/photo-breakpoints';
 import { computed, get } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import Component from '@ember/component';
@@ -14,7 +15,7 @@ export default Component.extend({
   crop: 'limit',
   cloudinaryId: null,
   adjustForDpr: true,
-  breakpoints: [200,300,400,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2800,3000,3500,4000,5000],
+  breakpoints: breakpoints,
 
   didInsertElement() {
     this._super(...arguments);

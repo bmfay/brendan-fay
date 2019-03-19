@@ -3,19 +3,24 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   photo: null,
+  classNameBindings: ['widthIsLimit::photo-album__photo-container--tall'],
   navVerticalSpace: 100, //TODO: update
-  widthPaddedSpace: 40,
+  widthPaddedSpace: 30,
 
   //TODO recalculate on resize?
 
-  widthIsLimit: computed('photo.{originalWidth,originalHeight}', function() {
+  isWidthLimit(photo) {
     const availHeight = document.documentElement.clientHeight - this.navVerticalSpace;
     const availWidth = document.documentElement.clientWidth - this.widthPaddedSpace;
 
     const screenRatio = availWidth / availHeight;
-    const photoRatio = this.photo.originalWidth / this.photo.originalHeight;
+    const photoRatio = photo.originalWidth / photo.originalHeight;
 
     return photoRatio > screenRatio;
+  },
+
+  widthIsLimit: computed('photo.{originalWidth,originalHeight}', function() {
+    this.isWidthLimit(this.photo);
   }),
 
   width: computed('widthIsLimit', function() {
@@ -29,10 +34,6 @@ export default Component.extend({
       return document.documentElement.clientHeight - this.navVerticalSpace;
     }
   }),
-
-  imgClass: computed('widthIsLimit', function() {
-    return this.widthIsLimit ? 'photo-album__photo--wide' : 'photo-album__photo--tall';
-  })
 
   //prevId: computed('photo.photoAlbum.photos.[]')
 });

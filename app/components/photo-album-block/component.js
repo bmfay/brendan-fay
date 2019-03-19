@@ -6,7 +6,7 @@ import $ from "jquery"
 
 export default Component.extend({
   photoAlbum: null,
-  photoSorting: Object.freeze(['positiong']),
+  photoSorting: Object.freeze(['position']),
   sortedPhotos: computed.sort('photoAlbum.photos', 'photoSorting'),
   width: 750,
 });

@@ -1,8 +1,8 @@
-{{#link-to 'main.photo-albums.show.photos.show' photoAlbum.id photoAlbum.photos.firstObject.id tagName='h2'}}
+{{#link-to 'main.photo-albums.show.photos.show' photoAlbum.id sortedPhotos.firstObject.id tagName='h2' class='l--m-b-5'}}
   {{photoAlbum.title}}
 {{/link-to}}
 
-{{#link-to 'main.photo-albums.show.photos.show' photoAlbum.id photoAlbum.photos.firstObject.id}}
+{{#link-to 'main.photo-albums.show.photos.show' photoAlbum.id sortedPhotos.firstObject.id}}
   {{cloudinary-img
     cloudinaryId=sortedPhotos.firstObject.cloudinaryId
     class='photo-album__thumb'
