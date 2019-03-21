@@ -1,39 +1,22 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import PhotoDimensions from 'brendan-fay/mixins/photo-dimensions';
 
-export default Component.extend({
+export default Component.extend(PhotoDimensions, {
   photo: null,
   classNameBindings: ['widthIsLimit::photo-album__photo-container--tall'],
-  navVerticalSpace: 100, //TODO: update
-  widthPaddedSpace: 30,
 
   //TODO recalculate on resize?
-
-  isWidthLimit(photo) {
-    const availHeight = document.documentElement.clientHeight - this.navVerticalSpace;
-    const availWidth = document.documentElement.clientWidth - this.widthPaddedSpace;
-
-    const screenRatio = availWidth / availHeight;
-    const photoRatio = photo.originalWidth / photo.originalHeight;
-
-    return photoRatio > screenRatio;
-  },
 
   widthIsLimit: computed('photo.{originalWidth,originalHeight}', function() {
     this.isWidthLimit(this.photo);
   }),
 
   width: computed('widthIsLimit', function() {
-    if (this.widthIsLimit) {
-      return document.documentElement.clientWidth - this.widthPaddedSpace;
-    }
+    return this.calculateWidth(this.widthIsLimit);
   }),
 
   height: computed('widthIsLimit', function() {
-    if (!this.widthIsLimit) {
-      return document.documentElement.clientHeight - this.navVerticalSpace;
-    }
+    return this.calculateHeight(this.widthIsLimit);
   }),
-
-  //prevId: computed('photo.photoAlbum.photos.[]')
 });

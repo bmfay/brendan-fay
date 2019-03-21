@@ -1,11 +1,8 @@
-/* global cloudinary */
-import ENV from 'brendan-fay/config/environment';
-import breakpoints from 'brendan-fay/lib/photo-breakpoints';
-import { computed, get } from '@ember/object';
-import { isPresent } from '@ember/utils';
 import Component from '@ember/component';
+import CloudinaryImgUrl from 'brendan-fay/mixins/cloudinary-img-url';
+import { computed } from '@ember/object';
 
-export default Component.extend({
+export default Component.extend(CloudinaryImgUrl, {
   tagName: 'img',
   attributeBindings: ['src', 'imgWidth:width', 'imgHeight:height'],
 
@@ -14,43 +11,13 @@ export default Component.extend({
   height: null,
   crop: 'limit',
   cloudinaryId: null,
-  adjustForDpr: true,
-  breakpoints: breakpoints,
-
-  didInsertElement() {
-    this._super(...arguments);
-  },
-
-  findBreakpointForValue(value) {
-    let breakpoint = 5000;
-    for (let i=0; i < this.breakpoints.length; i++) {
-      if (this.breakpoints[i] > value) {
-        breakpoint = this.breakpoints[i];
-        break;
-      }
-    }
-    return breakpoint;
-  },
 
   src: computed('width', 'height', 'crop', 'cloudinaryId', function() {
-    const cloudinaryId = get(this, 'cloudinaryId');
-
-    let dpr = isNaN(window.devicePixelRatio) ? 1 : window.devicePixelRatio;
-
-    const opts = {};
-    ['width', 'height', 'crop'].forEach(property => {
-      if (isPresent(get(this, property))) {
-        let value = get(this, property)
-        if (['width','height'].includes(property)) {
-          value = this.findBreakpointForValue(value * dpr)
-        }
-        opts[property] = value;
-      }
+    return this.findCloudinarySrc({
+      width: this.width,
+      height: this.height,
+      crop: this.crop,
+      cloudinaryId: this.cloudinaryId
     });
-
-    const cl = cloudinary.Cloudinary.new({cloud_name: ENV.cloudinary.name});
-    const cloudinaryUrl = cl.url(cloudinaryId, opts);
-
-    return `${cloudinaryUrl}.jpg`;
   }),
 });
