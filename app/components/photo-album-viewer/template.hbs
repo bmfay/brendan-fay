@@ -1,0 +1,25 @@
+<div class='photo-album__top-nav'>
+  {{#link-to closeRoute}}
+    <img src='/assets/close.png' alt='close' class='overlay__close'>
+  {{/link-to}}
+</div>
+{{photo-viewer photo=photo class='photo-album__photo-viewer'}}
+<div class='photo-album__bottom-nav'>
+  <div class='photo-album__bottom-nav-previous'>
+    {{#if prevId}}
+      {{#link-to 'main.photo-albums.show.photos' (query-params photoNumber=prevId)}}
+        Previous
+      {{/link-to}}
+    {{/if}}
+  </div>
+  <div class='photo-album__bottom-nav-count'>
+    {{photo.position}} / {{photoAlbum.photos.length}}
+  </div>
+  <div class='photo-album__bottom-nav-next'>
+    {{#if nextId}}
+      {{#link-to 'main.photo-albums.show.photos' (query-params photoNumber=nextId)}}
+        Next
+      {{/link-to}}
+    {{/if}}
+  </div>
+</div>
