@@ -1,6 +1,15 @@
 <div class='photo-album__top-nav'>
+  {{#if supportsFullscreen}}
+    <div {{action 'toggleFullScreen'}}>
+      {{#if isFullscreened}}
+        <img src='/assets/arrows.svg' alt='full-screen' class='overlay__button'>
+      {{else}}
+        <img src='/assets/arrows-expand.svg' alt='exit-full-screen' class='overlay__button'>
+      {{/if}}
+    </div>
+  {{/if}}
   {{#link-to closeRoute}}
-    <img src='/assets/close.png' alt='close' class='overlay__close'>
+    <img src='/assets/close.svg' alt='close' class='overlay__button'>
   {{/link-to}}
 </div>
 {{photo-viewer photo=photo class='photo-album__photo-viewer'}}

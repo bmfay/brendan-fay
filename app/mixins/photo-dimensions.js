@@ -6,8 +6,8 @@ export default Mixin.create({
   widthPaddedSpace: 30,
 
   isWidthLimit(photo) {
-    const availHeight = document.documentElement.clientHeight - this.navVerticalSpace;
-    const availWidth = document.documentElement.clientWidth - this.widthPaddedSpace;
+    const availHeight = this.safeCalculateHeight();
+    const availWidth = this.safeCalculateWidth();
 
     const screenRatio = availWidth / availHeight;
     const photoRatio = photo.originalWidth / photo.originalHeight;
@@ -15,9 +15,33 @@ export default Mixin.create({
     return photoRatio > screenRatio;
   },
 
+  safeCalculateWidth() {
+    // since we preload images for an album, we don't want to do that twice,
+    // so even if their browser window is small, let's get the largest image
+    // for their screen upfront
+    let totalWidth = window.screen.width;
+    let documentWidth = document.documentElement.clientWidth;
+
+    if (isNaN(totalWidth) || totalWidth < documentWidth) {
+      totalWidth = documentWidth;
+    }
+    return totalWidth - this.widthPaddedSpace;
+  },
+
+  safeCalculateHeight() {
+    // get image big enough for full screen
+    let totalHeight = window.screen.height;
+    let documentHeight = document.documentElement.clientHeight;
+
+    if (isNaN(totalHeight) || totalHeight < documentHeight) {
+      totalHeight = documentHeight;
+    }
+    return totalHeight - this.navVerticalSpace;
+  },
+
   calculateWidth(widthIsLimit) {
     if (widthIsLimit) {
-      return document.documentElement.clientWidth - this.widthPaddedSpace;
+      return this.safeCalculateWidth();
     } else {
       return null;
     }
@@ -25,7 +49,7 @@ export default Mixin.create({
 
   calculateHeight(widthIsLimit) {
     if (!widthIsLimit) {
-      return document.documentElement.clientHeight - this.navVerticalSpace;
+      return this.safeCalculateHeight();
     } else {
       return null;
     }

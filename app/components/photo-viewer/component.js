@@ -9,7 +9,7 @@ export default Component.extend(PhotoDimensions, {
   //TODO recalculate on resize?
 
   widthIsLimit: computed('photo.{originalWidth,originalHeight}', function() {
-    this.isWidthLimit(this.photo);
+    return this.isWidthLimit(this.photo);
   }),
 
   width: computed('widthIsLimit', function() {

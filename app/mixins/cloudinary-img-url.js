@@ -1,7 +1,7 @@
 /* global cloudinary */
 import Mixin from '@ember/object/mixin';
 import ENV from 'brendan-fay/config/environment';
-import breakpoints from 'brendan-fay/lib/photo-breakpoints';
+import { breakpoints } from 'brendan-fay/lib/photo-breakpoints';
 import { isPresent } from '@ember/utils';
 
 export default Mixin.create({
@@ -23,8 +23,8 @@ export default Mixin.create({
 
     const opts = {};
     ['width', 'height', 'crop'].forEach(attributeName => {
-      if (isPresent(attributes.attributeName)) {
-        let value = attributes.attributeName;
+      if (isPresent(attributes[attributeName])) {
+        let value = attributes[attributeName];
         if (['width','height'].includes(attributeName)) {
           value = this.findBreakpointForValue(value * dpr)
         }
