@@ -25,6 +25,11 @@ export default Component.extend(CloudinaryImgUrl, PhotoDimensions, {
     this._super(...arguments);
     // TODO if photoNumber > 1, load first one slast
     this.preload(this.sortedPhotos.toArray(), this.photoNumber);
+
+    const _this = this;
+    this.$(window).on('fullscreenchange', (e) => {
+      _this.toggleProperty('isFullscreened');
+    });
   },
 
   preload(photos, index) {
@@ -59,14 +64,16 @@ export default Component.extend(CloudinaryImgUrl, PhotoDimensions, {
     return this.photoNumber < this.photoAlbum.photos.length ? this.photoNumber + 1 : null;
   }),
 
+  willDestroyElement() {
+    this.$(window).off('fullscreenchange');
+  },
+
   actions: {
     toggleFullScreen() {
       if (this.isFullscreened) {
         document.exitFullscreen();
-        set(this, 'isFullscreened', false);
       } else {
         document.documentElement.requestFullscreen();
-        set(this, 'isFullscreened', true);
       }
     },
   }
