@@ -2,7 +2,7 @@ import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
   photo: null,
-  navVerticalSpace: 100, //TODO: update
+  unusableVerticalSpace: 100, //TODO: update
   widthPaddedSpace: 30,
 
   isWidthLimit(photo) {
@@ -36,7 +36,7 @@ export default Mixin.create({
     if (isNaN(totalHeight) || totalHeight < documentHeight) {
       totalHeight = documentHeight;
     }
-    return totalHeight - this.navVerticalSpace;
+    return totalHeight - this.unusableVerticalSpace;
   },
 
   calculateWidth(widthIsLimit) {

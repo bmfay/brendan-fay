@@ -7,4 +7,6 @@ export default Component.extend({
   isPreview: false,
   showExtraBlankPage: false,
   sortedPages: null,
+  pageWidth: null,
+  pageHeight: null,
 });

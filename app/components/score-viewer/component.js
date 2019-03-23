@@ -1,8 +1,9 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { set } from "@ember/object";
+import PhotoDimensions from 'brendan-fay/mixins/photo-dimensions';
 
-export default Component.extend({
+export default Component.extend(PhotoDimensions, {
   composition: null,
   score: computed.reads('composition.score'),
   initialPageOffset: 1,
@@ -12,6 +13,7 @@ export default Component.extend({
   isPreview: false,
   scoreClass: '',
   isPlaying: false,
+  unusableVerticalSpace: 200, // TODO: responsive
 
   sortedPages: computed('score.pages.@each.pageNumber', function() {
     const sortedPages = this.score.pages.sortBy('pageNumber');
@@ -30,6 +32,10 @@ export default Component.extend({
   totalPageCount: computed('showExtraBlankPage', 'score.pages.[]', 'initialPageOffset', function() {
     const basePageCount = this.score.pages.length + this.initialPageOffset;
     return this.showExtraBlankPage ? basePageCount + 1 : basePageCount;
+  }),
+
+  maxAvailHeight: computed(function() {
+    return this.safeCalculateHeight();
   }),
 
   didInsertElement() {

@@ -10,7 +10,7 @@ export default Mixin.create({
   findBreakpointForValue(value) {
     let breakpoint = 5000;
     for (let i=0; i < this.breakpoints.length; i++) {
-      if (this.breakpoints[i] > value) {
+      if (this.breakpoints[i] >= value) {
         breakpoint = this.breakpoints[i];
         break;
       }

@@ -8,5 +8,5 @@ export default Component.extend({
   photoAlbum: null,
   photoSorting: Object.freeze(['position']),
   sortedPhotos: computed.sort('photoAlbum.photos', 'photoSorting'),
-  width: 750,
+  width: 800,
 });
